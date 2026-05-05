@@ -118,6 +118,10 @@
     background: radial-gradient(ellipse at center, transparent 40%, hsl(0 0% 0% / 0.7) 100%);
     pointer-events: none;
   }
+
+  .bg-black, .bg-black * {
+    color: #fff !important;
+  }
 }
 
 @keyframes draw-circle {
