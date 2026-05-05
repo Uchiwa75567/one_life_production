@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 222 24% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 24% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 24% 8%;
+    --primary: 218 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 94%;
+    --secondary-foreground: 222 24% 8%;
+    --muted: 220 14% 94%;
+    --muted-foreground: 222 9% 42%;
+    --accent: 218 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 86%;
+    --input: 0 0% 100%;
+    --ring: 218 100% 50%;
+
+    --anthracite: 220 10% 20%;
+    --pure-black: 0 0% 0%;
+    --pure-white: 0 0% 100%;
+
+    --radius: 0.25rem;
+
+    --shadow-glow: 0 0 40px hsl(218 100% 50% / 0.24);
+    --shadow-elevate: 0 12px 40px -8px hsl(222 24% 8% / 0.18);
+    --gradient-fade: linear-gradient(180deg, hsl(0 0% 98% / 0) 0%, hsl(0 0% 98% / 1) 100%);
+    --gradient-blue: linear-gradient(135deg, hsl(218 100% 50%), hsl(218 100% 60%));
+    --transition-cinematic: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 218 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 240 2% 60%;
+    --accent: 218 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14%;
+    --input: 0 0% 10%;
+    --ring: 218 100% 50%;
+    --anthracite: 240 2% 10%;
+    --shadow-glow: 0 0 40px hsl(218 100% 50% / 0.35);
+    --shadow-elevate: 0 12px 40px -8px hsl(0 0% 0% / 0.6);
+    --gradient-fade: linear-gradient(180deg, hsl(0 0% 4% / 0) 0%, hsl(0 0% 4% / 1) 100%);
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+  ::selection { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--muted)); }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border)); }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary)); }
+}
+
+@layer utilities {
+  .font-display { font-family: 'Montserrat', sans-serif; }
+  .font-body { font-family: 'Inter', sans-serif; }
+
+  .text-balance { text-wrap: balance; }
+
+  .blue-glow {
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.3), 0 0 30px hsl(var(--primary) / 0.25);
+  }
+  .blue-glow-hover {
+    transition: var(--transition-cinematic);
+  }
+  .blue-glow-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.5), 0 8px 30px hsl(var(--primary) / 0.3);
+  }
+
+  .grain-overlay::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.06; pointer-events: none; mix-blend-mode: overlay;
+  }
+
+  .vignette::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, hsl(0 0% 0% / 0.7) 100%);
+    pointer-events: none;
+  }
+}
+
+@keyframes draw-circle {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
